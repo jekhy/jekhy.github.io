@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>脆皮沙发 - 首页</title>
+        <title>脆皮沙发 - OpenGL渲染混合测试</title>
         <meta name="viewport" content="width=device-width">
 
         <!-- 最新 Bootstrap 核心 CSS 文件 -->
@@ -42,7 +42,7 @@
 
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="/">日志</a></li>
+        <li ><a href="/">日志</a></li>
         <li ><a href="/about.html">关于</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">项目 <b class="caret"></b></a>
@@ -65,12 +65,21 @@
 </div>
 
       <div class="container">
-        
-<div class="row">
+        <div class="row">
     <div class="col-md-12">
+
+        <ul class="breadcrumb">
+            <li><a href="/">主页</a></li>
+            
+            
+            <li><a href="#">游戏开发</a></li>
+            
+            
+            <li class="active">OpenGL渲染混合测试</li>
+        </ul>
         <div class="page-header">
             <h1>
-                <a href="/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/2014/05/04/gltest.html" >OpenGL渲染混合测试</a>
+                OpenGL渲染混合测试
                  
                 <small>一个简单的android工具</small>
                 
@@ -78,60 +87,39 @@
             </h1>
             <div>
                 
-                <span class="label label-info"></span>
+                <span class="label label-info">cocos2d-x</span>
                 
-                <span class="label label-info"></span>
+                <span class="label label-info">quick-x</span>
                 
-                <span class="label label-info"></span>
-                
-            </div>
-        </div>
-        <blockquote><p>在<code>quick-x</code>以及<code>cocos2dx</code>中，可使用OpenGL渲染混合模式增强视觉效果，让当前图像在场景中渲染时和重叠的图像进行色彩变化。</p>
-</blockquote>
-        <a href="/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/2014/05/04/gltest.html" >查看全文 &gt;&gt;</a>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="page-header">
-            <h1>
-                <a href="/%E7%94%9F%E6%B4%BB%E4%BD%93%E9%AA%8C/2014/05/03/my-first-blog.html" >体验jekyll写博客</a>
-                
-                <small>[03 May 2014]</small>
-            </h1>
-            <div>
-                
-                <span class="label label-info"></span>
-                
-                <span class="label label-info"></span>
+                <span class="label label-info">openGL</span>
                 
             </div>
         </div>
-        <blockquote><p>作为一名渴望进步的码农，其实俺在很多地方写过博客。但同时作为一名懒汉，俺所有的博客都没能坚持下去，为了对得起短暂的人生，我决定要改正自己这些不良的习惯，建立一套科学、健康、可持续发展的良性习惯，由“常立志”的不稳定状态逐步稳定到“立长志”的正确人生状态。
-所以，趁五一假期，在github上用jekyll建立了一个轻量级的静态博客，用于记录和整理自己的码农人生，期望能对这个美好却不完美的世界做出点滴贡献。</p>
-</blockquote>
-        <a href="/%E7%94%9F%E6%B4%BB%E4%BD%93%E9%AA%8C/2014/05/03/my-first-blog.html" >查看全文 &gt;&gt;</a>
+        <p>在<code>quick-x</code>以及<code>cocos2dx</code>中，可使用OpenGL渲染混合模式增强视觉效果，让当前图像在场景中渲染时和重叠的图像进行色彩变化。</p>
+
+<p>一开始做美工的小伙伴问我是否能从代码级别支持PS的ADD模式，当时我就一头雾水，对于更喜欢将PS视为“Play Station”的缩写的我来说，PhotoShop简直是个异类！后来大概研究了下，发现了OpenGL的这种混合模式貌似可以做到需求效果，做了一个效果后，小伙伴觉得效果还不错，于是就拿来用了:
+<img alt="渲染混合模式效果图" src="/assets/gltest.snapshot.png" class="img-thumbnail" /></p>
+
+<h3>代码中使用方式</h3>
+
+<p>使用方式简单，给要做混合模式的sprite（精灵）调用一下setBlendFunc即可：</p>
+
+<div class="highlight"><pre><code class="lua"><span class="kd">local</span> <span class="n">f</span> <span class="o">=</span> <span class="n">ccBlendFunc</span><span class="p">()</span>
+<span class="n">f</span><span class="p">.</span><span class="n">src</span> <span class="o">=</span> <span class="n">GL_SRC_ALPHA</span>
+<span class="n">f</span><span class="p">.</span><span class="n">dst</span> <span class="o">=</span> <span class="n">GL_ONE_MINUS_SRC_ALPHA</span>
+ 
+<span class="n">sprite</span><span class="p">:</span><span class="n">setBlendFunc</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</code></pre></div>
+
+<p>其实一开始我没弄明白是否两个要混合的sprite都需要加混合效果，后来尝试了一下发现只需要给其中一个加混合效果即可。</p>
+
+<h3>android效果测试工具</h3>
+
+<p>为了让小伙伴们随时可以做渲染混合效果的测试，刚花了点时间写了个测试工具，目前还是个简单粗暴的版本，只支持android系统（ios没测），并且需要手动将要测试的图片文件copy到<code>/sdcard/gltest/</code>目录下，另外可能还有别的bug以及使用体验方面的不爽，欢迎大家根据真实使用情况随时来喷。</p>
+
+<p><a href="/assets/Gltest.apk">点我下载 Gltest.apk</a></p>
+
     </div>
-</div>
-
-<div class="pull-left">
-    <ul class="pagination">
-
-    
-        <li class="disabled">
-            <a href="#">上一页</a>
-        </li>
-    
-        <li class="active">
-            <a href="#">1 / 1</a>
-        </li>
-    
-        <li class="disabled">
-            <a href="#">下一页</a>
-        </li>
-    
-    </ul>
 </div>
       </div>
       <div class="well">
