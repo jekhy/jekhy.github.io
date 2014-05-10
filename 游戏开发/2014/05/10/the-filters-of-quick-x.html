@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>脆皮沙发 - 使用quick-x中的filters滤镜效果</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- 最新 Bootstrap 核心 CSS 文件 -->
+        <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+
+        <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+        <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap-theme.min.css">
+
+        <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+        <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+
+        <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+        <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+        
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+      
+<!-- Fixed navbar -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">导航开关</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">脆皮沙发</a>
+    </div>
+
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+        <li class="active"><a href="/">日志</a></li>
+        <li ><a href="/about.html">关于</a></li>
+<!--
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">项目 <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li class="dropdown-header">公司项目</li>
+            <li class="divider"></li>
+            <li><a href="#">php-module-manager</a></li>
+            <li><a href="#">php框架生成器</a></li>
+            <li class="divider"></li>
+            <li class="dropdown-header">个人项目</li>
+            <li class="divider"></li>
+            <li><a href="#">末日之巅</a></li>
+            <li><a href="#">热血世界杯</a></li>
+          </ul>
+        </li>
+-->
+      </ul>
+    </div>
+
+  </div><!--/.container -->
+</div>
+
+      <div class="container">
+        <div class="row">
+    <div class="col-md-12">
+
+        <ul class="breadcrumb">
+            <li><a href="/">主页</a></li>
+            
+            
+            <li><a href="#">游戏开发</a></li>
+            
+            
+            <li class="active">使用quick-x中的filters滤镜效果</li>
+        </ul>
+        <div class="page-header">
+            <h1>
+                使用quick-x中的filters滤镜效果
+                
+                <small>[10 May 2014]</small>
+            </h1>
+            <div>
+                
+                <span class="label label-info">quick-x</span>
+                
+                <span class="label label-info">cocos2d-x</span>
+                
+            </div>
+        </div>
+        <p>滤镜（filter）是photoshop中用于制作一些图像效果的工具，在css和flash开发中，类似的特殊图像效果也以filter命名，在游戏开发中常用的有模糊（blur）、褪色（saturation）等效果，最近几天一直在研究quick-x中的特殊效果实现方式，写一篇日志记录一下。</p>
+
+<hr>
+
+<p>按照美工同学Lyson给的设计稿，游戏暂停时的背景需要有模糊效果，在关卡失败的结果界面还需要有褪色（降低色彩饱和度）效果。因为之前一直做后端开发，前端的一些技术名词以及开发技巧接触的很少，而且quick-x的文档不是很全面，只能一边看源码一边摸索着使用，为了实现这两个效果，近期着实花了不少时间。</p>
+
+<p>先贴一下目前已做好的实际效果图：</p>
+
+<ul>
+<li>单纯的模糊效果<br />
+<img alt="渲染混合模式效果图" src="/assets/the-filters-of-quick-x_blur.png" class="img-thumbnail" /></li>
+<li>模糊 + 褪色效果<br />
+<img alt="渲染混合模式效果图" src="/assets/the-filters-of-quick-x_saturation.png" class="img-thumbnail" /></li>
+</ul>
+
+<hr>
+
+<h2>分步记录下整个制作过程</h2>
+
+<h3>首先，理清实现思路</h3>
+
+<p>一开始不懂如何实现，所以先是问同事以及搜索引擎，了解到了两个关键词：<code>filter</code>和<code>shader</code>。
+查了下quick-x目前的文档，很遗憾，没有相关的内容。
+查了下cocos2d-x的文档，有shader，没发现filter，继续搜关键词、读文档、QQ群提问，对shader大概有了些基本了解，是一个针对图像渲染的着色器，可以通过定制openGL的program来实现各种特殊效果，模糊和褪色都可以实现，于是乎，跑了一下cocos2d-x 3.0的cpptest项目，终于看到了Shader的模糊效果，要的就是这个，Good！
+但是要在quick-x上实现比较复杂，貌似还没有转换shader的相关c++类，需要自己用tolua去转c++代码。
+此时，发现了最新版本的quick-x中的filter接口，是牛人<strong>@zrong</strong>写的，<a href="http://zengrong.net/" target="_blank"><strong>他的博客在这里</strong></a>，写了很多quick-x相关的文章，对学习quick-x有很大帮助，期间还咨询了他使用filter时player报错的问题，感谢他一针见血的回答对我巨大的帮助！
+然后再次遇到问题，filter只能对某个sprite类添加滤镜效果，如何模糊整个背景呢？
+搜了下，好多人说是截屏实现的，也就是用截屏的图像创建一个sprite，然后给它加滤镜。
+继续研究quick-x的截屏功能，又发现了<strong>@zrong</strong>大侠写的一个display.printscreen功能，甚至连滤镜接口都留好了！OK，就是它了！思路已畅通！</p>
+
+<h3>然后，用lua实现功能效果</h3>
+
+<div class="highlight"><pre><code class="lua">    <span class="c1">-- 要截屏的CCNode对象，我这里就是当前的游戏场景对象</span>
+    <span class="kd">local</span> <span class="n">scene</span> <span class="o">=</span> <span class="n">self</span>
+    <span class="c1">-- 滤镜效果和滤镜参数们（高斯模糊水平，高斯模糊垂直，色彩饱和度）</span>
+    <span class="kd">local</span> <span class="n">maskArgs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">filters</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;</span><span class="s">GAUSSIAN_VBLUR&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">GAUSSIAN_HBLUR&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">SATURATION&quot;</span><span class="p">},</span>
+        <span class="n">filterParams</span> <span class="o">=</span> <span class="p">{</span> <span class="p">{</span><span class="mi">3</span><span class="p">},</span> <span class="p">{</span><span class="mi">3</span><span class="p">},</span> <span class="p">{</span><span class="mf">0.25</span><span class="p">}</span> <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">-- 执行截屏并返回截屏创建的对象（由于加了滤镜，这里返回的是CCFilteredSprite）</span>
+    <span class="kd">local</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">display</span><span class="p">.</span><span class="n">printscreen</span><span class="p">(</span><span class="n">scene</span><span class="p">,</span> <span class="n">maskArgs</span><span class="p">)</span>
+        <span class="p">:</span><span class="n">pos</span><span class="p">(</span><span class="n">display</span><span class="p">.</span><span class="n">cx</span><span class="p">,</span> <span class="n">display</span><span class="p">.</span><span class="n">cy</span><span class="p">)</span>
+        <span class="p">:</span><span class="n">addTo</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>最后，贴几点注意事项</h3>
+
+<ol>
+<li>因为使用的是quick-x的develop版本的原因（还未发布2.2.3版本），需要编译quick-x的player，才能在player上看到滤镜效果，否则会报错的</li>
+<li>截屏Node中如果包含了 CCClippingRegionNode 对象，截屏内容有可能不完整，我是通过调用 setClippingEnabled(false) 方法临时解决的，以后有空查下c++代码的问题，可能是 CCClippingRegionNode::visit()方法的bug造成的</li>
+</ol>
+
+    </div>
+</div>
+      </div>
+      <div class="well footer">
+    powered by &lt;
+    <a href="http://jekyllrb.com/" target="_blank">jekyll</a> +
+    <a href="http://www.bootcss.com/" target="_blank">bootstrap</a> +
+    <a href="http://github.io/" target="_blank">github</a>
+    &gt;
+    <small>&copy; Jekhy 2014 </small>
+</div>
+
+    </body>
+</html>

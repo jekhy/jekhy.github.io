@@ -42,8 +42,10 @@
 
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li ><a href="/">日志</a></li>
+        
+        <li class="active"><a href="/">日志</a></li>
         <li ><a href="/about.html">关于</a></li>
+<!--
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">项目 <b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -58,6 +60,7 @@
             <li><a href="#">热血世界杯</a></li>
           </ul>
         </li>
+-->
       </ul>
     </div>
 
@@ -95,20 +98,24 @@
                 
             </div>
         </div>
-        <p>在<code>quick-x</code>以及<code>cocos2dx</code>中，可使用OpenGL渲染混合模式增强视觉效果，让当前图像在场景中渲染时和重叠的图像进行色彩变化。</p>
+        <p>在<code>quick-x</code>以及<code>cocos2dx</code>中，可使用OpenGL渲染混合模式增强视觉效果，让当前图像在场景中渲染时和重叠的图像按像素分别进行r、g、b、a值的算术运算，以产生色彩、透明度等变化，提升图片叠加显示效果。</p>
 
-<p>一开始做美工的小伙伴问我是否能从代码级别支持PS的ADD模式，当时我就一头雾水，对于更喜欢将PS视为“Play Station”的缩写的我来说，PhotoShop简直是个异类！后来大概研究了下，发现了OpenGL的这种混合模式貌似可以做到需求效果，做了一个效果后，小伙伴觉得效果还不错，于是就拿来用了:
+<hr>
+
+<h3>需求理解</h3>
+
+<p>一开始美工小伙伴Lyson问我是否能从代码级别支持PS的ADD模式，当时我就一头雾水，对于更喜欢将PS视为“Play Station”的缩写的我来说，PhotoShop简直是个异类！后来大概研究了下，发现了OpenGL的这种混合模式貌似可以做到需求效果，做了一个效果后，小伙伴觉得效果还不错，于是就拿来用了:
 <img alt="渲染混合模式效果图" src="/assets/gltest.snapshot.png" class="img-thumbnail" /></p>
 
 <h3>代码中使用方式</h3>
 
 <p>使用方式简单，给要做混合模式的sprite（精灵）调用一下setBlendFunc即可：</p>
 
-<div class="highlight"><pre><code class="lua"><span class="kd">local</span> <span class="n">f</span> <span class="o">=</span> <span class="n">ccBlendFunc</span><span class="p">()</span>
-<span class="n">f</span><span class="p">.</span><span class="n">src</span> <span class="o">=</span> <span class="n">GL_SRC_ALPHA</span>
-<span class="n">f</span><span class="p">.</span><span class="n">dst</span> <span class="o">=</span> <span class="n">GL_ONE_MINUS_SRC_ALPHA</span>
- 
-<span class="n">sprite</span><span class="p">:</span><span class="n">setBlendFunc</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<div class="highlight"><pre><code class="lua">    <span class="kd">local</span> <span class="n">f</span> <span class="o">=</span> <span class="n">ccBlendFunc</span><span class="p">()</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">src</span> <span class="o">=</span> <span class="n">GL_SRC_ALPHA</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">dst</span> <span class="o">=</span> <span class="n">GL_ONE_MINUS_SRC_ALPHA</span>
+     
+    <span class="n">sprite</span><span class="p">:</span><span class="n">setBlendFunc</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </code></pre></div>
 
 <p>其实一开始我没弄明白是否两个要混合的sprite都需要加混合效果，后来尝试了一下发现只需要给其中一个加混合效果即可。</p>
@@ -122,7 +129,7 @@
     </div>
 </div>
       </div>
-      <div class="well">
+      <div class="well footer">
     powered by &lt;
     <a href="http://jekyllrb.com/" target="_blank">jekyll</a> +
     <a href="http://www.bootcss.com/" target="_blank">bootstrap</a> +
