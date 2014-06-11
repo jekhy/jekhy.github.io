@@ -1,9 +1,9 @@
-local list = { 
-  ver = "1.0.1", 
+local list = {
+  ver = "1.0.1",
   stage = {
-    {name="background/bg_menu.png"},
-  }, 
-  remove = { 
-  }, 
-} 
+    {name="background/bg_menu.png", code="5cae67bcd618d797e3d050a693e9fd12"},
+  },
+  remove = {
+  },
+}
 return list
