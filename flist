@@ -1,7 +1,6 @@
 local list = {
-  ver = "1.0.1",
+  ver = "1.0.0",
   stage = {
-    {name="background/bg_menu.png", code="3664e275084f01268ec7c22d9900fb43"},
   },
   remove = {
   },
