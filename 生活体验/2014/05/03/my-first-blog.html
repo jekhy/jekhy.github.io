@@ -44,8 +44,8 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         
-        <li class="active"><a href="/">日志</a></li>
-        <li ><a href="/about.html">关于</a></li>
+        <li class="active"><a href="">日志</a></li>
+        <li ><a href="about.html">关于</a></li>
 <!--
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">项目 <b class="caret"></b></a>
@@ -73,7 +73,7 @@
     <div class="col-md-12">
 
         <ul class="breadcrumb">
-            <li><a href="/">主页</a></li>
+            <li><a href="">主页</a></li>
             
             
             <li><a href="#">生活体验</a></li>
@@ -109,30 +109,35 @@ jekyll创建项目很快，支持markdown、textile等标记语言，支持pygme
 
 <p>测试代码高亮：</p>
 
-<div class="highlight"><pre><code class="php"><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
-<span class="lineno"> 2</span> <span class="c1">// 测试下代码嵌入，从最熟悉的php开始吧</span>
-<span class="lineno"> 3</span> <span class="nv">$obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\MyNamespace\MyClass</span><span class="p">(</span><span class="nv">$myParams</span><span class="p">);</span>
-<span class="lineno"> 4</span> <span class="nv">$obj</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">(</span><span class="s2">&quot;my cmd </span><span class="si">{</span><span class="nv">$a</span><span class="si">}</span><span class="s2">.</span><span class="si">$b</span><span class="s2">,&quot;</span> <span class="o">.</span> <span class="s1">&#39;&gt;&gt;&gt; result&#39;</span><span class="p">);</span>
-<span class="lineno"> 5</span> <span class="cm">/* 行号显示的方式不尽如人意啊…… */</span>
-<span class="lineno"> 6</span> <span class="nv">$isit</span> <span class="o">=</span> <span class="s">&lt;&lt;&lt;eof</span>
-<span class="lineno"> 7</span> <span class="s">这是一大段文字</span>
-<span class="lineno"> 8</span> <span class="s">中间可以换很多行</span>
-<span class="lineno"> 9</span> <span class="s">lua里貌似是这样：[[</span>
-<span class="lineno">10</span> <span class="s">    即将有一大波文字占据这几行</span>
-<span class="lineno">11</span> <span class="s">    比如这行</span>
-<span class="lineno">12</span> <span class="s">    这行</span>
-<span class="lineno">13</span> <span class="s">    还有这行</span>
-<span class="lineno">14</span> <span class="s">]]</span>
-<span class="lineno">15</span> <span class="s">eof</span>
-<span class="lineno">16</span> <span class="cp">?&gt;</span><span class="x"></span>
-</code></pre></div>
+<div class="highlight"><pre><code class="php">&lt;?php
+// 测试下代码嵌入，从最熟悉的php开始吧
+$obj = new \MyNamespace\MyClass($myParams);
+$obj-&gt;execute(&quot;my cmd {$a}.$b,&quot; . &#39;&gt;&gt;&gt; result&#39;);
+/* 行号显示的方式不尽如人意啊…… */
+$isit = &lt;&lt;&lt;eof
+这是一大段文字
+中间可以换很多行
+lua里貌似是这样：[[
+    即将有一大波文字占据这几行
+    比如这行
+    这行
+    还有这行
+]]
+eof
+?&gt;</code></pre></div>
 
 <h2>先到这里吧，留个mark，以后接着写</h2>
 
 <p>本来还准备写一整套搭建博客的过程，但是看见网上到处都是，一搜一大把，我就懒得再卖弄了。另外再推荐下<a href="http://www.zhihu.com/question/20223939">知乎的这个帖子</a>，有几个模板不错。</p>
 
+<br />
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=905104"></script>
+<!-- UY END -->
     </div>
 </div>
+
       </div>
       <div class="well footer">
     powered by &lt;
