@@ -44,24 +44,8 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         
-        <li class="active"><a href="">日志</a></li>
-        <li ><a href="about.html">关于</a></li>
-<!--
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">项目 <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li class="dropdown-header">公司项目</li>
-            <li class="divider"></li>
-            <li><a href="#">php-module-manager</a></li>
-            <li><a href="#">php框架生成器</a></li>
-            <li class="divider"></li>
-            <li class="dropdown-header">个人项目</li>
-            <li class="divider"></li>
-            <li><a href="#">末日之巅</a></li>
-            <li><a href="#">热血世界杯</a></li>
-          </ul>
-        </li>
--->
+        <li class="active"><a href="http://diary.jekhy.com/">日志</a></li>
+        <li ><a href="http://diary.jekhy.com/about.html">关于</a></li>
       </ul>
     </div>
 
@@ -73,7 +57,7 @@
     <div class="col-md-12">
 
         <ul class="breadcrumb">
-            <li><a href="">主页</a></li>
+            <li><a href="http://diary.jekhy.com/">主页</a></li>
             
             
             <li><a href="#">游戏开发</a></li>
@@ -105,9 +89,9 @@
 
 <ul>
 <li>单纯的模糊效果<br />
-<img alt="渲染混合模式效果图" src="assets/the-filters-of-quick-x_blur.png" class="img-thumbnail" /></li>
+<img alt="渲染混合模式效果图" src="http://diary.jekhy.com/assets/the-filters-of-quick-x_blur.png" class="img-thumbnail" /></li>
 <li>模糊 + 褪色效果<br />
-<img alt="渲染混合模式效果图" src="assets/the-filters-of-quick-x_saturation.png" class="img-thumbnail" /></li>
+<img alt="渲染混合模式效果图" src="http://diary.jekhy.com/assets/the-filters-of-quick-x_saturation.png" class="img-thumbnail" /></li>
 </ul>
 
 <hr>
@@ -127,17 +111,17 @@
 
 <h3>然后，用lua实现功能效果</h3>
 
-<div class="highlight"><pre><code class="lua">-- 要截屏的CCNode对象，我这里就是当前的游戏场景对象
-    local scene = self
-    -- 滤镜效果和滤镜参数们（高斯模糊水平，高斯模糊垂直，色彩饱和度）
-    local maskArgs = {
-        filters = {&quot;GAUSSIAN_VBLUR&quot;, &quot;GAUSSIAN_HBLUR&quot;, &quot;SATURATION&quot;},
-        filterParams = { {3}, {3}, {0.25} }
-    }
-    -- 执行截屏并返回截屏创建的对象（由于加了滤镜，这里返回的是CCFilteredSprite）
-    local mask = display.printscreen(scene, maskArgs)
-        :pos(display.cx, display.cy)
-        :addTo(self)</code></pre></div>
+<div class="highlight"><pre><code class="lua"><span class="c1">-- 要截屏的CCNode对象，我这里就是当前的游戏场景对象</span>
+    <span class="kd">local</span> <span class="n">scene</span> <span class="o">=</span> <span class="n">self</span>
+    <span class="c1">-- 滤镜效果和滤镜参数们（高斯模糊水平，高斯模糊垂直，色彩饱和度）</span>
+    <span class="kd">local</span> <span class="n">maskArgs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">filters</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;</span><span class="s">GAUSSIAN_VBLUR&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">GAUSSIAN_HBLUR&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">SATURATION&quot;</span><span class="p">},</span>
+        <span class="n">filterParams</span> <span class="o">=</span> <span class="p">{</span> <span class="p">{</span><span class="mi">3</span><span class="p">},</span> <span class="p">{</span><span class="mi">3</span><span class="p">},</span> <span class="p">{</span><span class="mf">0.25</span><span class="p">}</span> <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">-- 执行截屏并返回截屏创建的对象（由于加了滤镜，这里返回的是CCFilteredSprite）</span>
+    <span class="kd">local</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">display</span><span class="p">.</span><span class="n">printscreen</span><span class="p">(</span><span class="n">scene</span><span class="p">,</span> <span class="n">maskArgs</span><span class="p">)</span>
+        <span class="p">:</span><span class="n">pos</span><span class="p">(</span><span class="n">display</span><span class="p">.</span><span class="n">cx</span><span class="p">,</span> <span class="n">display</span><span class="p">.</span><span class="n">cy</span><span class="p">)</span>
+        <span class="p">:</span><span class="n">addTo</span><span class="p">(</span><span class="n">self</span><span class="p">)</span></code></pre></div>
 
 <h3>最后，贴几点注意事项</h3>
 

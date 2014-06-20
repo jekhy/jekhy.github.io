@@ -44,24 +44,8 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         
-        <li class="active"><a href="">日志</a></li>
-        <li ><a href="about.html">关于</a></li>
-<!--
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">项目 <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li class="dropdown-header">公司项目</li>
-            <li class="divider"></li>
-            <li><a href="#">php-module-manager</a></li>
-            <li><a href="#">php框架生成器</a></li>
-            <li class="divider"></li>
-            <li class="dropdown-header">个人项目</li>
-            <li class="divider"></li>
-            <li><a href="#">末日之巅</a></li>
-            <li><a href="#">热血世界杯</a></li>
-          </ul>
-        </li>
--->
+        <li class="active"><a href="http://diary.jekhy.com/">日志</a></li>
+        <li ><a href="http://diary.jekhy.com/about.html">关于</a></li>
       </ul>
     </div>
 
@@ -73,7 +57,7 @@
     <div class="col-md-12">
 
         <ul class="breadcrumb">
-            <li><a href="">主页</a></li>
+            <li><a href="http://diary.jekhy.com/">主页</a></li>
             
             
             <li><a href="#">游戏开发</a></li>
@@ -106,17 +90,17 @@
 <h3>需求理解</h3>
 
 <p>一开始美工小伙伴Lyson问我是否能从代码级别支持PS的ADD模式，当时我就一头雾水，对于更喜欢将PS视为“Play Station”的缩写的我来说，PhotoShop简直是个异类！后来大概研究了下，发现了OpenGL的这种混合模式貌似可以做到需求效果，做了一个效果后，小伙伴觉得效果还不错，于是就拿来用了:
-<img alt="渲染混合模式效果图" src="assets/gltest.snapshot.png" class="img-thumbnail" /></p>
+<img alt="渲染混合模式效果图" src="http://diary.jekhy.com/assets/gltest.snapshot.png" class="img-thumbnail" /></p>
 
 <h3>代码中使用方式</h3>
 
 <p>使用方式简单，给要做混合模式的sprite（精灵）调用一下setBlendFunc即可：</p>
 
-<div class="highlight"><pre><code class="lua">local f = ccBlendFunc()
-    f.src = GL_SRC_ALPHA
-    f.dst = GL_ONE_MINUS_SRC_ALPHA
+<div class="highlight"><pre><code class="lua"><span class="kd">local</span> <span class="n">f</span> <span class="o">=</span> <span class="n">ccBlendFunc</span><span class="p">()</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">src</span> <span class="o">=</span> <span class="n">GL_SRC_ALPHA</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">dst</span> <span class="o">=</span> <span class="n">GL_ONE_MINUS_SRC_ALPHA</span>
      
-    sprite:setBlendFunc(f)</code></pre></div>
+    <span class="n">sprite</span><span class="p">:</span><span class="n">setBlendFunc</span><span class="p">(</span><span class="n">f</span><span class="p">)</span></code></pre></div>
 
 <p>其实一开始我没弄明白是否两个要混合的sprite都需要加混合效果，后来尝试了一下发现只需要给其中一个加混合效果即可。</p>
 
@@ -124,7 +108,7 @@
 
 <p>为了让小伙伴们随时可以做渲染混合效果的测试，刚花了点时间写了个测试工具，目前还是个简单粗暴的版本，只支持android系统（ios没测），并且需要手动将要测试的图片文件copy到<code>/sdcard/gltest/</code>目录下，另外可能还有别的bug以及使用体验方面的不爽，欢迎大家根据真实使用情况随时来喷。</p>
 
-<p><a href="assets/Gltest.apk">点我下载 Gltest.apk</a></p>
+<p><a href="http://diary.jekhy.com/assets/Gltest.apk">点我下载 Gltest.apk</a></p>
 
 <br />
 <!-- UY BEGIN -->
