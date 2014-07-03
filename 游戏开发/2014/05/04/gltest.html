@@ -96,11 +96,12 @@
 
 <p>使用方式简单，给要做混合模式的sprite（精灵）调用一下setBlendFunc即可：</p>
 
-<div class="highlight"><pre><code class="lua"><span class="kd">local</span> <span class="n">f</span> <span class="o">=</span> <span class="n">ccBlendFunc</span><span class="p">()</span>
+<div class="highlight"><pre><code class="lua">    <span class="kd">local</span> <span class="n">f</span> <span class="o">=</span> <span class="n">ccBlendFunc</span><span class="p">()</span>
     <span class="n">f</span><span class="p">.</span><span class="n">src</span> <span class="o">=</span> <span class="n">GL_SRC_ALPHA</span>
     <span class="n">f</span><span class="p">.</span><span class="n">dst</span> <span class="o">=</span> <span class="n">GL_ONE_MINUS_SRC_ALPHA</span>
      
-    <span class="n">sprite</span><span class="p">:</span><span class="n">setBlendFunc</span><span class="p">(</span><span class="n">f</span><span class="p">)</span></code></pre></div>
+    <span class="n">sprite</span><span class="p">:</span><span class="n">setBlendFunc</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</code></pre></div>
 
 <p>其实一开始我没弄明白是否两个要混合的sprite都需要加混合效果，后来尝试了一下发现只需要给其中一个加混合效果即可。</p>
 

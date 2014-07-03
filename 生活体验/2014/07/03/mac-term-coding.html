@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>脆皮沙发 - 解决mac终端下的命令不换行和中文乱码等问题</title>
+        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="jekhy的游戏开发生涯" />
+        <meta name="keywords" content="quick-x,cocos2d-x,game,游戏,手游,mobile,app,php,web,cocos2d,quick,jekhy" />
+        <!-- 最新 Bootstrap 核心 CSS 文件 -->
+        <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+
+        <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+        <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap-theme.min.css">
+
+        <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+        <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+
+        <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+        <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+        
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+      
+<!-- Fixed navbar -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">导航开关</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">脆皮沙发</a>
+    </div>
+
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+        <li class="active"><a href="http://diary.jekhy.com/">日志</a></li>
+        <li ><a href="http://diary.jekhy.com/about.html">关于</a></li>
+      </ul>
+    </div>
+
+  </div><!--/.container -->
+</div>
+
+      <div class="container">
+        <div class="row">
+    <div class="col-md-12">
+
+        <ul class="breadcrumb">
+            <li><a href="http://diary.jekhy.com/">主页</a></li>
+            
+            
+            <li><a href="#">生活体验</a></li>
+            
+            
+            <li class="active">解决mac终端下的命令不换行和中文乱码等问题</li>
+        </ul>
+        <div class="page-header">
+            <h1>
+                解决mac终端下的命令不换行和中文乱码等问题
+                
+                <small>[03 Jul 2014]</small>
+            </h1>
+            <div>
+                
+                <span class="label label-info">mac</span>
+                
+                <span class="label label-info">term</span>
+                
+            </div>
+        </div>
+        <p>之前设置过mac终端的命令提示符颜色，还胡乱修改过一些配置，一开始也没觉得什么，可是后来发现命令行在输入很长的命令时，比如一个很长的路径，超出一行的部分竟然折回来覆盖了本行的开头部分。另外在vim下，输入中文都是一些乱七八糟的字符，本来以为是字符编码的问题，但是vim的encoding、fileencoding、termencoding都设置成utf-8了，还是不行。这两个问题在网上大概搜了下，都是相对简单的其他类似问题，跟我遇到的情况还不太一样，因为也不太影响正常使用，所以一直拖着没去解决，可是今天我实在是觉得受不了了，定位了下问题原因，针对原因再去搜索解决方案，那就容易多了，下面简单说下问题解决方案。</p>
+
+<hr>
+
+<h2>问题简述</h2>
+
+<ul>
+<li>终端命令行输入长于一行的字符时，没有换到下一行，而是从本行的开头进行覆盖，症状如下：
+<img alt="命令提示符输入长字符串不换行" src="http://diary.jekhy.com/assets/20140703.1.png" class="img-thumbnail" /></li>
+<li>在终端命令行下输入中文没问题，但在vim中输入中文会变成乱码，无论是本地vim还是ssh到远程服务器的vim都会乱码，但是用Command+C/Command+V复制粘贴的中文并不是乱码，症状如下：
+<img alt="终端vim下输入中文变乱码" src="http://diary.jekhy.com/assets/20140703.2.png" class="img-thumbnail" />
+<img alt="终端命令行下输入中文正常" src="http://diary.jekhy.com/assets/20140703.3.png" class="img-thumbnail" /></li>
+</ul>
+
+<h2>解决过程</h2>
+
+<p>我是先解决的终端下vim中文乱码问题，打开终端的配置界面，在“设置”选项卡中有一堆打钩的选项，当我去掉“对使用Control-V来输入的非ASCII内容进行转移”的勾时，发现输入的中文就变正常了，此问题解决：
+<img alt="终端配置选项" src="http://diary.jekhy.com/assets/20140703.4.png" class="img-thumbnail" /></p>
+
+<p>然后定位了下长字符串不换行的问题，先打开之前配置过命令行颜色的 ~/.bash_profile 文件，找到设置PS1的那行，注释掉先，再打开新的终端，发现没有颜色的命令提示符后边输入长字符串是正常换行的，那么问题肯定就是PS1的问题了，网上搜了下，说是需要将加颜色的非输出字符用&quot;\[&quot;和&quot;\]&quot;即可，于是，我把原本的PS1改了下，保存后再打开新的终端就好了：</p>
+
+<div class="highlight"><pre><code class="bash"><span class="c"># old PS1=&#39;[\e[32m\u\e[0m@\e[34m\W\e[0m]\$ &#39;</span>
+<span class="nv">PS1</span><span class="o">=</span><span class="s1">&#39;\[[\e[32m\u\e[0m@\e[34m\W\e[0m]\$\] &#39;</span>
+</code></pre></div>
+
+<p>注意最后那个空格，一开始我把空格也包在了\[和\]之间，但是发现有问题，命令提示符后先输入空格再退格，会将整个命令提示符都删掉，后来把空格挪到外边就好了，目前使用一切正常啦！</p>
+
+<br />
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=905104"></script>
+<!-- UY END -->
+    </div>
+</div>
+
+      </div>
+      <div class="well footer">
+    powered by &lt;
+    <a href="http://jekyllrb.com/" target="_blank">jekyll</a> +
+    <a href="http://www.bootcss.com/" target="_blank">bootstrap</a> +
+    <a href="http://github.io/" target="_blank">github</a>
+    &gt;
+    <small>&copy; Jekhy 2014 </small>
+</div>
+
+    </body>
+</html>
