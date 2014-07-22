@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>脆皮沙发 - 在Quick-cocos2d-x中实现动态暂停面板</title>
+        <title>脆皮沙发 - 在Quick-cocos2d-x中实现动画暂停面板</title>
         <meta name="viewport" content="width=device-width">
         <meta name="description" content="jekhy的游戏开发生涯" />
         <meta name="keywords" content="quick-x,cocos2d-x,game,游戏,手游,mobile,app,php,web,cocos2d,quick,jekhy" />
@@ -63,11 +63,11 @@
             <li><a href="#">游戏开发</a></li>
             
             
-            <li class="active">在Quick-cocos2d-x中实现动态暂停面板</li>
+            <li class="active">在Quick-cocos2d-x中实现动画暂停面板</li>
         </ul>
         <div class="page-header">
             <h1>
-                在Quick-cocos2d-x中实现动态暂停面板
+                在Quick-cocos2d-x中实现动画暂停面板
                 
                 <small>[22 Jul 2014]</small>
             </h1>
@@ -79,7 +79,7 @@
                 
             </div>
         </div>
-        <p>之前实现暂停都是临时用<code>CCDirector</code>的<code>pause()</code>和<code>resume()</code>简单实现的，但是想在这个基础上扩展带动画效果的暂停界面就比较困难了，因为<code>pause()</code>方法会将所有运行中的Actions都暂停，也包括新增到场景中的。为了实现像其他游戏一样的“动态暂停面板”，只能换个方式了，今天尝试了下<code>CCDirector</code>的<code>pushScene()</code>的实现方式，代码简洁，并且就是我想要的功能。</p>
+        <p>之前实现暂停都是临时用<code>CCDirector</code>的<code>pause()</code>和<code>resume()</code>简单实现的，但是想在这个基础上扩展带动画效果的暂停界面就比较困难了，因为<code>pause()</code>方法会将所有运行中的Actions都暂停，也包括新增到场景中的。为了实现像其他游戏一样的“动画暂停面板”，只能换个方式了，今天尝试了下<code>CCDirector</code>的<code>pushScene()</code>的实现方式，代码简洁，这就是我想要的功能。</p>
 
 <hr>
 
@@ -92,29 +92,29 @@
 <p>配合quick-x封装好的<code>display.printscreen</code>截屏功能，完全符合我的需求：</p>
 
 <div class="highlight"><pre><code class="lua"><span class="c1">-- 暂停场景代码</span>
-    <span class="kd">local</span> <span class="n">PauseScene</span> <span class="o">=</span> <span class="n">class</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">PauseScene&quot;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">display</span><span class="p">.</span><span class="n">newScene</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">PauseScene&quot;</span><span class="p">)</span>
-    <span class="k">end</span><span class="p">)</span>
+<span class="kd">local</span> <span class="n">PauseScene</span> <span class="o">=</span> <span class="n">class</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">PauseScene&quot;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">display</span><span class="p">.</span><span class="n">newScene</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">PauseScene&quot;</span><span class="p">)</span>
+<span class="k">end</span><span class="p">)</span>
 
-    <span class="k">function</span> <span class="nf">PauseScene</span><span class="p">:</span><span class="n">ctor</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
-        <span class="n">bg</span><span class="p">:</span><span class="n">center</span><span class="p">():</span><span class="n">addTo</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
-        <span class="n">bg</span><span class="p">:</span><span class="n">setColor</span><span class="p">(</span><span class="n">ccc3</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">))</span>
-        <span class="kd">local</span> <span class="n">btn</span> <span class="o">=</span> <span class="n">Button</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">Resume&quot;</span><span class="p">)</span>
-            <span class="p">:</span><span class="n">center</span><span class="p">()</span>
-            <span class="p">:</span><span class="n">addTo</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
-            <span class="p">:</span><span class="n">onButtonClicked</span><span class="p">(</span><span class="k">function</span><span class="p">()</span>
-                <span class="n">cc</span><span class="p">.</span><span class="n">Director</span><span class="p">:</span><span class="n">sharedDirector</span><span class="p">():</span><span class="n">popScene</span><span class="p">()</span>
-            <span class="k">end</span><span class="p">)</span>
-    <span class="k">end</span>
+<span class="k">function</span> <span class="nf">PauseScene</span><span class="p">:</span><span class="n">ctor</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
+    <span class="n">bg</span><span class="p">:</span><span class="n">center</span><span class="p">():</span><span class="n">addTo</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+    <span class="n">bg</span><span class="p">:</span><span class="n">setColor</span><span class="p">(</span><span class="n">ccc3</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">))</span>
+    <span class="kd">local</span> <span class="n">btn</span> <span class="o">=</span> <span class="n">Button</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">Resume&quot;</span><span class="p">)</span>
+        <span class="p">:</span><span class="n">center</span><span class="p">()</span>
+        <span class="p">:</span><span class="n">addTo</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+        <span class="p">:</span><span class="n">onButtonClicked</span><span class="p">(</span><span class="k">function</span><span class="p">()</span>
+            <span class="n">cc</span><span class="p">.</span><span class="n">Director</span><span class="p">:</span><span class="n">sharedDirector</span><span class="p">():</span><span class="n">popScene</span><span class="p">()</span>
+        <span class="k">end</span><span class="p">)</span>
+<span class="k">end</span>
 
-    <span class="c1">-- 游戏场景的暂停按钮点击事件</span>
-    <span class="n">btn</span><span class="p">:</span><span class="n">onButtonClicked</span><span class="p">(</span><span class="k">function</span><span class="p">()</span>
-        <span class="kd">local</span> <span class="n">snapshot</span> <span class="o">=</span> <span class="n">display</span><span class="p">.</span><span class="n">printscreen</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
-        <span class="kd">local</span> <span class="n">pScene</span> <span class="o">=</span> <span class="n">PauseScene</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">snapshot</span><span class="p">)</span>
-        <span class="n">cc</span><span class="p">.</span><span class="n">Director</span><span class="p">:</span><span class="n">sharedDirector</span><span class="p">():</span><span class="n">pushScene</span><span class="p">(</span><span class="n">pScene</span><span class="p">)</span>
-    <span class="k">end</span><span class="p">)</span></code></pre></div>
+<span class="c1">-- 游戏场景的暂停按钮点击事件</span>
+<span class="n">btn</span><span class="p">:</span><span class="n">onButtonClicked</span><span class="p">(</span><span class="k">function</span><span class="p">()</span>
+    <span class="kd">local</span> <span class="n">snapshot</span> <span class="o">=</span> <span class="n">display</span><span class="p">.</span><span class="n">printscreen</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">pScene</span> <span class="o">=</span> <span class="n">PauseScene</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">snapshot</span><span class="p">)</span>
+    <span class="n">cc</span><span class="p">.</span><span class="n">Director</span><span class="p">:</span><span class="n">sharedDirector</span><span class="p">():</span><span class="n">pushScene</span><span class="p">(</span><span class="n">pScene</span><span class="p">)</span>
+<span class="k">end</span><span class="p">)</span></code></pre></div>
 
-<p>以前基本都是使用quick中的app:enterScene(&quot;SceneName&quot;)来切换场景，其实也就是调用的<code>CCDirector</code>的<code>replaceScene</code>方法，对于这两个方法还比较陌生，如果用法有什么问题，还请多多指教。</p>
+<p>以前基本都是使用quick中的app:enterScene(&quot;SceneName&quot;)来切换场景，其实也就是调用的<code>CCDirector</code>的<code>replaceScene</code>方法，对于以上这两个方法还比较陌生，如果用法有什么问题，还请多多指教。</p>
 
 <br />
 <!-- UY BEGIN -->
