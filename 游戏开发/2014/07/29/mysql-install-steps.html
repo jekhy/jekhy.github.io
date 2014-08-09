@@ -81,7 +81,7 @@
 
 <hr>
 
-<p>该附件为配置模板：[&quot;http://blog.jekhy.com/wp-content/uploads/2012/11/template.cnf_.zip&quot;]template.cnf</p>
+<p>该附件为配置模板：<a href="http://jekhy.com//assets/download/template.cnf">template.cnf</a></p>
 
 <p>配置好，并设置正确的权限。</p>
 
@@ -110,11 +110,11 @@
 <p>DELETE FROM mysql.user WHERE user != &#39;root&#39; OR host != &#39;localhost&#39;;
 DELETE FROM mysql.db;
 DROP DATABASE test;
-CREATE DATABASE <code>YourDB</code> DEFAULT CHARACTER SET utf8 COLLATE utf8<em>general</em>ci;</p>
+CREATE DATABASE `YourDB` DEFAULT CHARACTER SET utf8 COLLATE utf8<em>general</em>ci;</p>
 
 <p>给项目用户增加权限：</p>
 
-<p>GRANT ALL ON <code>YourDB</code>.* TO <code>YourUser</code>@<code>localhost</code> IDENTIFIED BY &#39;YourPass&#39;;</p>
+<p>GRANT ALL ON `YourDB`.* TO `YourUser`@`localhost` IDENTIFIED BY &#39;YourPass&#39;;</p>
 
 <h3>配置完毕，修改root默认密码：</h3>
 
