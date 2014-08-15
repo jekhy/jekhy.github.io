@@ -9,9 +9,9 @@
   margin: 0;
 }
 
-html, body { height: 100%}
-body { padding-top: 70px}
-code, body {line-height: 30px}
+html,body{height:100%;font-size:18px;font-family:Helvetica,Tahoma,Arial,"Microsoft YaHei","微软雅黑",sans-serif;}
+body{padding-top:70px}
+code,body{line-height:40px}
 p {text-indent:2em}
 .post {
     -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.175);
