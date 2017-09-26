@@ -247,6 +247,12 @@ a.external:hover {
   font-size: 14px;
   line-height: 1.6;
 }
+.footer {
+  position: absolute;
+  padding: 5px 10px;
+  right: 0px;
+  bottom: 0px;
+}
 .body-post {
   background: #f5f5f5;
 }
