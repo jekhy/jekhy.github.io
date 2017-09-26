@@ -456,7 +456,8 @@ a.external:hover {
   color: #fff;
   font-size: 14px;
 }
-#particles-js {
+#aside-img {
+  background-image: url("/static/img/aside.jpg");
   width: 100%;
   height: 100%;
   background-repeat: no-repeat;
