@@ -193,7 +193,7 @@ a.external:hover {
   color: #fff;
   margin-bottom: 20px;
   letter-spacing: 0.15em;
-  text-shadow: rgba(0,0,0,0.5) 0 0 15px, rgba(0,0,0,0.5) 0 0 10px;
+  text-shadow: rgb(172, 156, 130) 0 0 15px, rgb(63, 67, 70) 0 0 10px;
 }
 .index-wrapper .info-card a {
   margin: 0 15px;
