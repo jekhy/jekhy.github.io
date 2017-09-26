@@ -167,7 +167,7 @@ a.external:hover {
   max-width: 500px;
   background: #264a52;
   background-image: url("/static/img/aside.jpg");
-  background-position: 50% 50%;
+  background-position: 54% 74%;
 }
 @media screen and (max-width: 767px) {
   .index-wrapper .aside {
