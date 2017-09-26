@@ -1,5 +1,3 @@
 permalink: /:year:month:day/:title
 title: Crispy Sofa
 url: http://blog.jekhy.com
-feed: /atom.xml
-author_info: <a href="http://jekhy.com/">Jekhy</a>
