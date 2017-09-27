@@ -511,6 +511,5 @@ li.L9 {
 #backToTop {
   position: fixed;
   right: 5px;
-  border: 1px solid #000;
-  width: 300px;
+  bottom: 30px;
 }
