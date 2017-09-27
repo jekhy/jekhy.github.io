@@ -10,6 +10,13 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="{{ site.feed }}" />
     <link rel="stylesheet" href="/static/css/style.css" />
+    <script src="/static/js/jquery-3.2.1.min.js" type="text/javascript"></script>
   </head>
+<body{% if layout.layout == "post" %} class="body-post"{% endif %}>
+<hide>{{layout}},{{layout.layout}}</hide>
 {{ content }}
+
+  <script src="/static/js/main.js" type="text/javascript"></script>
+
+</body>
 </html>
