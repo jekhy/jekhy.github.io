@@ -508,7 +508,7 @@ li.L9 {
   .var {color: #ca402b;}
   .fun {color: #516aec;}
 }
-#toc {
+#backToTop {
   position: fixed;
   right: 5px;
   border: 1px solid #000;

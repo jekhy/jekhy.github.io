@@ -19,6 +19,27 @@ $(function() {
         prettyPrint();
     });
 
+    // 添加返回顶部按钮功能
+    if ($('#backToTop').length) {
+        $(window).scroll(function(){
+            if ($(window).scrollTop() > 100) {
+                $("#backToTop").fadeIn(1500);
+            } else {
+                $("#backToTop").fadeOut(1500);
+            }
+        });
+
+        //当点击跳转链接后，回到页面顶部位置
+        $("#backToTop").click(function(){
+            if ($('html').scrollTop()) {
+                $('html').animate({ scrollTop: 0 }, 500);
+            } else {
+                $('body').animate({ scrollTop: 0 }, 500);
+            }
+            return false;
+        });
+    }
+
     // 显示空间提供商的声明
     if (location.href.indexOf('blog.jekhy.com') > -1) {
         $('#hostedByCodingPages').show();
