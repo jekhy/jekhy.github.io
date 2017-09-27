@@ -19,8 +19,8 @@ $(function() {
         prettyPrint();
     });
 
-    // 隐藏空间提供商的声明
-    if (location.href.indexOf('blog.jekhy.com') == -1) {
-        $('#hostedByCodingPages').hide();
+    // 显示空间提供商的声明
+    if (location.href.indexOf('blog.jekhy.com') > -1) {
+        $('#hostedByCodingPages').show();
     }
 })

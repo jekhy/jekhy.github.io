@@ -12,12 +12,7 @@
     <link rel="stylesheet" href="/static/css/style.css" />
     <script src="/static/js/jquery-3.2.1.min.js" type="text/javascript"></script>
   </head>
-<body{% if layout.layout == "post" %} class="body-post"{% endif %}>
-<!--
-  layout:{{layout}},
-  layout.layout:{{layout.layout}},
-  page.isPost:{{page.isPost}},
--->
+<body{% if layout.isPost %} class="body-post"{% endif %}>
 {{ content }}
 
   {% include footer.html %}
