@@ -311,7 +311,7 @@ a.external:hover {
   border-bottom: 2px solid #eee;
   padding-bottom: 10px;
 }
-@media $mobiel {
+@media screen and (max-width: 767px) {
   .post-wrapper h2 {
     font-size: 20px;
   }
@@ -507,4 +507,10 @@ li.L9 {
   .dec {color: #a65926;}
   .var {color: #ca402b;}
   .fun {color: #516aec;}
+}
+#toc {
+  position: fixed;
+  right: 5px;
+  border: 1px solid #000;
+  width: 300px;
 }

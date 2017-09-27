@@ -15,7 +15,7 @@ $(function() {
 
     // 添加代码高亮的class
     $('pre').addClass('prettyprint linenums');
-    $.getScript('/static/js/prettify/prettify.js',function(){
+    $.getScript('/static/lib/prettify/prettify.js', function(){
         prettyPrint();
     });
 
