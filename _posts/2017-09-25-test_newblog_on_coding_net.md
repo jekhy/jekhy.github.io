@@ -48,9 +48,3 @@ if ($name != "") {
     echo "Hello " . $name . "!";
 }
 ```
-
-layout:{{layout}}
-
-site:{{site}}
-
-page:{{page}}
