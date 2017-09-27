@@ -23,18 +23,18 @@ $(function() {
     if ($('#backToTop').length) {
         $(window).scroll(function(){
             if ($(window).scrollTop() > 100) {
-                $("#backToTop").fadeIn(1500);
+                $("#backToTop").fadeIn(200);
             } else {
-                $("#backToTop").fadeOut(1500);
+                $("#backToTop").fadeOut(200);
             }
         });
 
         //当点击跳转链接后，回到页面顶部位置
         $("#backToTop").click(function(){
             if ($('html').scrollTop()) {
-                $('html').animate({ scrollTop: 0 }, 500);
+                $('html').animate({ scrollTop: 0 }, 200);
             } else {
-                $('body').animate({ scrollTop: 0 }, 500);
+                $('body').animate({ scrollTop: 0 }, 200);
             }
             return false;
         });
