@@ -1,4 +1,5 @@
 $(function() {
+    // 外链加右侧小图标
     $('a').each(function(index, element){
         var href = $(this).attr('href');
         if (href){
@@ -11,4 +12,15 @@ $(function() {
             }
         }
     });
+
+    // 添加代码高亮的class
+    $('pre').addClass('prettyprint linenums');
+    $.getScript('/static/js/prettify/prettify.js',function(){
+        prettyPrint();
+    });
+
+    // 隐藏空间提供商的声明
+    if (location.href.indexOf('blog.jekhy.com') == -1) {
+        $('#hostedByCodingPages').hide();
+    }
 })
