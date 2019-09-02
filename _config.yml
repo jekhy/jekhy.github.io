@@ -1,3 +1,5 @@
 permalink: /:year:month:day/:title
 title: Crispy Sofa
 url: http://blog.jekhy.com
+
+theme: jekyll-theme-cayman
